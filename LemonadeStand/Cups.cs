@@ -17,5 +17,9 @@ namespace LemonadeStand
         }
 
         //member methods
+        public override void GetPrice()
+        {
+            Console.WriteLine("How many cups would you like to purchase? Prices are as follows: ");
+        }
     }
 }
