@@ -8,18 +8,39 @@ namespace LemonadeStand
 {
     public class Weather
     {
-        //member variables
-        //conditions(sunny, cloudy, raining, hazy, 
-        public int temperature;
-        List<string> conditions = new List<string>() {"sunny", "cloudy", "rainy", "foggy", "hazy", "overcast" };
- 
-        //constructor
+        private int temperature;
+        private string condition;
+        public int Temperature
+        {
+            get
+            {
+                return temperature;
+            }
+            set
+            {
+                temperature = value;
+            }
+        }
+
+         public string Condition
+        {
+            get
+            {
+                return condition;
+            }
+            set
+            {
+                condition = value;
+            }
+        }
+        
+
+        List<string> conditions = new List<string>() {"sunny", "partly cloudy", "rainy", "foggy", "hazy", "overcast" };
+       
         public Weather()
         {
 
         }
-
-        //member methods
         public int SetTemperature()
         {
             Random random = new Random();
@@ -29,7 +50,22 @@ namespace LemonadeStand
 
         public void SetConditions()
         {
+            Random random = new Random();
+            int index = random.Next(conditions.Count);
+            condition = conditions[index];
+        }
 
+        public void DeclareWeather()
+        {
+            Console.WriteLine("Today's weather is " + temperature + " and " + condition + ".");
+            Console.ReadLine();
+        }
+
+        public void DeclareForecast()
+        {
+            Console.WriteLine("Tomorrow's weather is forecast to be " + temperature + " and " + condition + ".");
+            Console.ReadLine();
+            Console.Clear();
         }
     }
 }
