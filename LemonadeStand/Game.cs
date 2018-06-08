@@ -9,23 +9,29 @@ namespace LemonadeStand
     public class Game
     {
         //member variables
-        public Weather weather;
+        //public Weather weather;
+        public Inventory inventory;
         //constructor
         public Game()
         {
-            weather = new Weather();
+            //weather = new Weather();
+            inventory = new Inventory();
         }
 
         //member methods
         public void RunGame()
         {
-           weather.SetTemperature();
-           weather.SetConditions();
-           weather.DeclareWeather();
+            //weather.SetTemperature();
+            //weather.SetConditions();
+            //weather.DeclareWeather();
 
-           weather.SetTemperature();
-           weather.SetConditions();
-           weather.DeclareForecast();
+            // weather.SetTemperature();
+            //weather.SetConditions();
+            //weather.DeclareForecast();
+            inventory.PurchaseCups();
+            inventory.PurchaseLemons();
+            inventory.PurchaseSugar();
+            inventory.PurchaseIce();
         }
     }
 }
