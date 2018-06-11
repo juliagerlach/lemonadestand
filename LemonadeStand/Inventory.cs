@@ -30,13 +30,13 @@ namespace LemonadeStand
 
         public double CupPrice
         {
-            get {return cupPrice;}
+            get { return cupPrice; }
         }
 
         public int CupPurchase
         {
-            get {return cupPurchase;}
-            set {cupPurchase = value;}
+            get { return cupPurchase; }
+            set { cupPurchase = value; }
         }
 
         public int LemonQuantity
@@ -90,25 +90,37 @@ namespace LemonadeStand
             set { icePurchase = value; }
         }
 
+        public void PurchaseSupplies()
+        {
+            Console.WriteLine("It's time to purchase supplies. When prompted, type the quantity you wish to purchase. For eaach item, please enter an integer and then press 'enter'.");
+            Console.ReadLine();
+            PurchaseCups();
+            PurchaseLemons();
+            PurchaseSugar();
+            PurchaseIce();
+            //addsomething here to add total $ spent?
+            Console.Clear();
+        }
         public void PurchaseCups()
         {
             cupQuantity = 0;
             cupPrice = 0.05;
             string buyCups;
-                Console.WriteLine("How many cups would you like to purchase? They cost $" + cupPrice + " each. Please enter an integer.");
-                buyCups = Console.ReadLine();
-                    if (int.TryParse(buyCups, out int number1))
-                    {
-                    cupPurchase += Int32.Parse(buyCups);
-                    Console.WriteLine("You purchased " + cupPurchase + " cups for $" + (cupPrice * cupPurchase) + ". You had " + cupQuantity + " cups in inventory so you now have " + (cupQuantity + cupPurchase) + " cups. Press 'enter' to continue.");
-                    Console.ReadLine();
-                    }
-                    else
-                    {
-                    Console.WriteLine("Error: Must enter an integer.");
-                    Console.ReadLine();
-                    PurchaseCups();
-                    }
+            Console.WriteLine("How many cups would you like to purchase? They cost $" + cupPrice + " each. Please enter an integer.");
+            buyCups = Console.ReadLine();
+            if (int.TryParse(buyCups, out int number1))
+            {
+                cupPurchase += Int32.Parse(buyCups);
+                Console.WriteLine("You purchased " + cupPurchase + " cups for $" + (cupPrice * cupPurchase) + ". You had " + cupQuantity + " cups in inventory so you now have " + (cupQuantity + cupPurchase) + " cups. Press 'enter' to continue.");
+
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Error: Must enter an integer.");
+                Console.ReadLine();
+                PurchaseCups();
+            }
         }
 
         public void PurchaseLemons()
@@ -116,21 +128,21 @@ namespace LemonadeStand
             lemonQuantity = 0;
             lemonPrice = 0.15;
             string buyLemons;
-                Console.WriteLine("How many lemons would you like to purchase? They cost $" + lemonPrice + " each. Please enter an integer.");
-                buyLemons = Console.ReadLine();
-                    if (int.TryParse(buyLemons, out int number1))
-                    {
-                    lemonPurchase += Int32.Parse(buyLemons);
-                    Console.WriteLine("You purchased " + lemonPurchase + " lemons for $" + (lemonPrice * lemonPurchase) + ". You had " + lemonQuantity + " lemons in inventory so you now have " + (lemonQuantity + lemonPurchase) + " lemons. Press 'enter' to continue.");
-                    Console.ReadLine();
-                    }
-                     else
-                    {
-                    Console.WriteLine("Error: Must enter an integer.");
-                    Console.ReadLine();
-                    PurchaseLemons();
-                    }
-                }
+            Console.WriteLine("How many lemons would you like to purchase? They cost $" + lemonPrice + " each. Please enter an integer.");
+            buyLemons = Console.ReadLine();
+            if (int.TryParse(buyLemons, out int number1))
+            {
+                lemonPurchase += Int32.Parse(buyLemons);
+                Console.WriteLine("You purchased " + lemonPurchase + " lemons for $" + (lemonPrice * lemonPurchase) + ". You had " + lemonQuantity + " lemons in inventory so you now have " + (lemonQuantity + lemonPurchase) + " lemons. Press 'enter' to continue.");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Error: Must enter an integer.");
+                Console.ReadLine();
+                PurchaseLemons();
+            }
+        }
 
         public void PurchaseSugar()
         {
@@ -166,6 +178,7 @@ namespace LemonadeStand
                 icePurchase += Int32.Parse(buyIce);
                 Console.WriteLine("You purchased " + icePurchase + " cubes of ice for $" + (icePrice * icePurchase) + ". You had no ice cubes in inventory so you now have " + icePurchase + " cubes of ice. Press 'enter' to continue.");
                 Console.ReadLine();
+
             }
             else
             {
@@ -185,14 +198,15 @@ namespace LemonadeStand
 
         public void DeclareInventory()
         {
-            Console.WriteLine("Your current inventory contains: "+ cupQuantity + " cups, " + lemonQuantity + " lemons, " + sugarQuantity + " cups of sugar, " + iceQuantity + " ice cubes. Press 'enter' to continue.");
+            Console.WriteLine("Your current inventory contains: " + cupQuantity + " cups, " + lemonQuantity + " lemons, " + sugarQuantity + " cups of sugar, " + iceQuantity + " ice cubes. Press 'enter' to continue.");
             Console.ReadLine();
         }
         public void GetInventoryValue()
         {
-
+            int inventoryValue;
+            Console.WriteLine("The total value of your current inventory is " + ((cupQuantity * cupPrice) + (lemonQuantity * lemonPrice) + (sugarQuantity * sugarPrice)));
+            inventoryValue = Convert.ToInt32(Console.ReadLine());
         }
+
     }
-
-
 }

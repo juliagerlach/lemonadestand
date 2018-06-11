@@ -9,8 +9,20 @@ namespace LemonadeStand
     public class Wallet
     {
         //member variables
+        private int startingCash;
+        private int cashBalance;
 
-            //player cash
+        public int StartingCash
+        {
+            set { startingCash = 20; }
+        }
+
+        public int CashBalance
+        {
+            get { return cashBalance; }
+            set { cashBalance = value; }
+        }
+
 
 
 
@@ -22,7 +34,14 @@ namespace LemonadeStand
 
         //member methods
 
-        //LessCostOfSupplies();
-        //AddIncome(); 
+        public void PayForSupplies()
+        {
+
+        }
+
+        public void IncrementMoney()
+        {
+
+        } 
     }
 }

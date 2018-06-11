@@ -10,48 +10,98 @@ namespace LemonadeStand
     {
         //member variables
         private int lemonCount;
+        private int sugarCount;
+        private int iceCount;
 
         public int LemonCount
         {
             get { return lemonCount; }
             set { lemonCount = value; }
         }
-            
-            //how many of each per pitcher:
-        //lemons
-        //sugar
 
+        public int SugarCount
+        {
+            get { return sugarCount; }
+            set { sugarCount = value; }
+        }
 
-        //how much per cup:
-        //ice
-        //1 cup
+        public int IceCount
+        {
+            get { return iceCount; }
+            set { iceCount = value; }
+        }
 
-        //12 cups per pitcher
-
-        //calculate how much
-
-        public void SetRecipe()
+        public Inventory DetermineLemonsPerPitcher(Inventory inventory)
         {
             string useLemons;
-
-            Console.WriteLine("Time to create today's recipe! When prompted, indicate how many of each item you would like to use to make a pitcher of lemonade. Each pitcher makes 12 cups. Press 'enter' to continue.");
-            Console.ReadLine();
-            Console.WriteLine("How many lemons? Please enter an integer and then press 'enter' to continue.");
+            Console.WriteLine("How many lemons per pitcher? Please enter an integer and then press 'enter' to continue.");
             useLemons = Console.ReadLine();
             if (int.TryParse(useLemons, out int number1))
             {
                 lemonCount += Int32.Parse(useLemons);
 
-                Console.ReadLine();
             }
             else
             {
                 Console.WriteLine("Error: Must enter an integer.");
                 Console.ReadLine();
-                SetRecipe();
+                inventory = DetermineLemonsPerPitcher(inventory);
             }
-
+            return inventory;
         }
 
+        public Inventory DetermineSugarPerPitcher(Inventory inventory)
+        {
+            string useSugar;
+            Console.WriteLine("How many cups of sugar per pitcher? Please enter an integer and then press 'enter' to continue.");
+            useSugar = Console.ReadLine();
+            if (int.TryParse(useSugar, out int number2))
+            {
+                sugarCount += Int32.Parse(useSugar);
+            }
+            else
+            {
+                Console.WriteLine("Error: Must enter an integer.");
+                Console.ReadLine();
+                inventory = DetermineSugarPerPitcher(inventory);
+            }
+            return inventory;
+        }
+
+        public Inventory DetermineIcePerCup(Inventory inventory)
+            {
+                string useIce;
+                Console.WriteLine("How much ice per cup? Please enter an integer and then press 'enter' to continue.");
+                useIce = Console.ReadLine();
+                if (int.TryParse(useIce, out int number3))
+                {
+                    iceCount += Int32.Parse(useIce);
+                }
+                else
+                {
+                    Console.WriteLine("Error: Must enter an integer.");
+                    Console.ReadLine();
+                    inventory = DetermineIcePerCup(inventory);
+                }
+            return inventory;
+            }
+
+            public Inventory MakeRecipe(Inventory inventory)
+            {
+            Console.WriteLine("Time to create today's recipe! When prompted, indicate how much of each item you would like to use to make your lemonade. Each pitcher makes 12 cups. Press 'enter' to continue.");
+            Console.ReadLine();
+            inventory = DetermineLemonsPerPitcher(inventory);
+            inventory = DetermineSugarPerPitcher(inventory);
+            inventory = DetermineIcePerCup(inventory);
+            Console.Clear();
+
+            if (lemonCount <= inventory.LemonQuantity && sugarCount <= inventory.SugarQuantity && iceCount <= inventory.IceQuantity)
+            {
+                inventory.LemonQuantity -= lemonCount;
+                inventory.SugarQuantity -= sugarCount;
+                inventory.IceQuantity -= iceCount;
+            }
+            return inventory;
+            }       
     }
 }
