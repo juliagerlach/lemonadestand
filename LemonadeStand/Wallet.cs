@@ -9,13 +9,7 @@ namespace LemonadeStand
     public class Wallet
     {
         //member variables
-        private int startingCash;
         private int cashBalance;
-
-        public int StartingCash
-        {
-            set { startingCash = 20; }
-        }
 
         public int CashBalance
         {
@@ -29,7 +23,7 @@ namespace LemonadeStand
         //contructor
         public Wallet()
         {
-
+            cashBalance = 20;
         }
 
         //member methods
