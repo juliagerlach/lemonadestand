@@ -10,6 +10,10 @@ namespace LemonadeStand
     {
         //member variables
 
+            //player cash
+
+
+
         //contructor
         public Wallet()
         {
@@ -18,5 +22,7 @@ namespace LemonadeStand
 
         //member methods
 
+        //LessCostOfSupplies();
+        //AddIncome(); 
     }
 }

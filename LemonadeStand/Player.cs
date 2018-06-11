@@ -9,6 +9,8 @@ namespace LemonadeStand
     public class Player
     {
         //member variables
+        //name?
+
 
         //constructor
         public Player()

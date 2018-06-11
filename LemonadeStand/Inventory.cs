@@ -139,6 +139,7 @@ namespace LemonadeStand
             string buySugar;
             Console.WriteLine("How much sugar would you like to purchase? It costs $" + sugarPrice + " per cup. Please enter an integer.");
             buySugar = Console.ReadLine();
+
             if (int.TryParse(buySugar, out int number1))
             {
                 sugarPurchase += Int32.Parse(buySugar);
@@ -177,16 +178,20 @@ namespace LemonadeStand
         //constructor 
         //member methods
 
+        public void UseInventory()
+        {
 
+        }
 
-        //public void DisplayInventory()
-        // {
+        public void DeclareInventory()
+        {
+            Console.WriteLine("Your current inventory contains: "+ cupQuantity + " cups, " + lemonQuantity + " lemons, " + sugarQuantity + " cups of sugar, " + iceQuantity + " ice cubes. Press 'enter' to continue.");
+            Console.ReadLine();
+        }
+        public void GetInventoryValue()
+        {
 
-        // }
-        //public void GetInventoryValue()
-        // {
-
-        //}
+        }
     }
 
 
