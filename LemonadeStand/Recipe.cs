@@ -89,6 +89,7 @@ namespace LemonadeStand
             public Inventory MakeRecipe(Inventory inventory)
             {
             Console.WriteLine("Time to create today's recipe! When prompted, indicate how much of each item you would like to use to make your lemonade. Each pitcher makes 12 cups. Press 'enter' to continue.");
+
             Console.ReadLine();
             inventory = DetermineLemonsPerPitcher(inventory);
             inventory = DetermineSugarPerPitcher(inventory);
@@ -100,6 +101,14 @@ namespace LemonadeStand
                 inventory.LemonQuantity -= lemonCount;
                 inventory.SugarQuantity -= sugarCount;
                 inventory.IceQuantity -= iceCount;
+                Console.WriteLine("You just made one pitcher of lemonade.");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Your supplies have dwindled - not enough to make another pitcher!");
+                Console.ReadLine();
+                Console.Clear();
             }
             return inventory;
             }       

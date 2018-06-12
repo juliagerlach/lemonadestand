@@ -11,13 +11,22 @@ namespace LemonadeStand
         //member variables
         //public Weather weather;
         public Inventory inventory;
-        public Recipe recipe; 
+        public Recipe recipe;
+        public Customer customer;
+        public Wallet wallet;
+        public Day day;
+        public Player player;
         //constructor
         public Game()
         {
             //weather = new Weather();
             inventory = new Inventory();
             recipe = new Recipe();
+            customer = new Customer();
+            wallet = new Wallet();
+            day = new Day();
+            player = new Player();
+            
         }
 
         //member methods
@@ -30,8 +39,10 @@ namespace LemonadeStand
             //weather.SetTemperature();
             //weather.SetConditions();
             //weather.DeclareForecast();
-            inventory.PurchaseSupplies();
+            inventory.PurchaseSupplies(wallet);
             inventory = recipe.MakeRecipe(inventory);
+            
+
         }
     }
 }

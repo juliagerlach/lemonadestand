@@ -10,7 +10,7 @@ namespace LemonadeStand
     {
         //member variables
         //name?
-
+        
 
         //constructor
         public Player()

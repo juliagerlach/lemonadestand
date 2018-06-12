@@ -17,5 +17,14 @@ namespace LemonadeStand
         }
 
         //member methods
+        public void GeneratePeople()
+        {
+
+        }
+
+        public void GenerateCustomer()
+        {
+
+        }
     }
 }

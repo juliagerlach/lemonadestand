@@ -90,18 +90,18 @@ namespace LemonadeStand
             set { icePurchase = value; }
         }
 
-        public void PurchaseSupplies()
+        public void PurchaseSupplies(Wallet wallet)
         {
             Console.WriteLine("It's time to purchase supplies. When prompted, type the quantity you wish to purchase. For eaach item, please enter an integer and then press 'enter'.");
+
             Console.ReadLine();
-            PurchaseCups();
-            PurchaseLemons();
-            PurchaseSugar();
-            PurchaseIce();
-            //addsomething here to add total $ spent?
+            PurchaseCups(wallet);
+            PurchaseLemons(wallet);
+            PurchaseSugar(wallet);
+            PurchaseIce(wallet);
             Console.Clear();
         }
-        public void PurchaseCups()
+        public Wallet PurchaseCups(Wallet wallet)
         {
             cupQuantity = 0;
             cupPrice = 0.05;
@@ -112,18 +112,22 @@ namespace LemonadeStand
             {
                 cupPurchase += Int32.Parse(buyCups);
                 Console.WriteLine("You purchased " + cupPurchase + " cups for $" + (cupPrice * cupPurchase) + ". You had " + cupQuantity + " cups in inventory so you now have " + (cupQuantity + cupPurchase) + " cups. Press 'enter' to continue.");
-
                 Console.ReadLine();
+                cupQuantity += cupPurchase;
+                wallet.CashBalance -= (cupPrice * cupPurchase);
+                Console.WriteLine("You have $" + wallet.CashBalance + " remaining.");
             }
             else
             {
                 Console.WriteLine("Error: Must enter an integer.");
                 Console.ReadLine();
-                PurchaseCups();
+                wallet = PurchaseCups(wallet);
             }
+            
+            return wallet;
         }
 
-        public void PurchaseLemons()
+        public Wallet PurchaseLemons(Wallet wallet)
         {
             lemonQuantity = 0;
             lemonPrice = 0.15;
@@ -135,16 +139,20 @@ namespace LemonadeStand
                 lemonPurchase += Int32.Parse(buyLemons);
                 Console.WriteLine("You purchased " + lemonPurchase + " lemons for $" + (lemonPrice * lemonPurchase) + ". You had " + lemonQuantity + " lemons in inventory so you now have " + (lemonQuantity + lemonPurchase) + " lemons. Press 'enter' to continue.");
                 Console.ReadLine();
+                lemonQuantity += lemonPurchase;
+                wallet.CashBalance -= (lemonPrice * lemonPurchase);
+                Console.WriteLine("You have $" + wallet.CashBalance + " remaining.");
             }
             else
             {
                 Console.WriteLine("Error: Must enter an integer.");
                 Console.ReadLine();
-                PurchaseLemons();
+                wallet = PurchaseLemons(wallet);
             }
+            return wallet;
         }
 
-        public void PurchaseSugar()
+        public Wallet PurchaseSugar(Wallet wallet)
         {
             sugarQuantity = 0;
             sugarPrice = 0.08;
@@ -157,16 +165,20 @@ namespace LemonadeStand
                 sugarPurchase += Int32.Parse(buySugar);
                 Console.WriteLine("You purchased " + sugarPurchase + " cups of sugar for $" + (sugarPrice * sugarPurchase) + ". You had " + sugarQuantity + " cups of sugar in inventory so you now have " + (sugarQuantity + sugarPurchase) + " cups of sugar. Press 'enter' to continue.");
                 Console.ReadLine();
+                sugarQuantity += sugarPurchase;
+                wallet.CashBalance -= (sugarPrice * sugarPurchase);
+                Console.WriteLine("You have $" + wallet.CashBalance + " remaining.");
             }
             else
             {
                 Console.WriteLine("Error: Must enter an integer.");
                 Console.ReadLine();
-                PurchaseSugar();
+                wallet = PurchaseSugar(wallet);
             }
+            return wallet;
         }
 
-        public void PurchaseIce()
+        public Wallet PurchaseIce(Wallet wallet)
         {
             iceQuantity = 0;
             icePrice = 0.01;
@@ -178,17 +190,24 @@ namespace LemonadeStand
                 icePurchase += Int32.Parse(buyIce);
                 Console.WriteLine("You purchased " + icePurchase + " cubes of ice for $" + (icePrice * icePurchase) + ". You had no ice cubes in inventory so you now have " + icePurchase + " cubes of ice. Press 'enter' to continue.");
                 Console.ReadLine();
-
+                iceQuantity += icePurchase;
+                wallet.CashBalance -= (icePrice * icePurchase);
+                Console.WriteLine("You have $" + wallet.CashBalance + " remaining.");
             }
             else
             {
                 Console.WriteLine("Error: Must enter an integer.");
                 Console.ReadLine();
-                PurchaseIce();
+                wallet = PurchaseIce(wallet);
             }
+            return wallet;
         }
 
         //constructor 
+        public Inventory()
+        {
+
+        }
         //member methods
 
         public void UseInventory()

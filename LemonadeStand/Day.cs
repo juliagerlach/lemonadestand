@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Day
+    public class Day
     {
+//member variables
+
+        public Day()
+        {
+
+        }
+
+        //member methods
     }
+
+    
 }
