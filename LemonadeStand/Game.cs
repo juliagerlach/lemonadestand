@@ -16,6 +16,7 @@ namespace LemonadeStand
         public Wallet wallet;
         public Day day;
         public Player player;
+        static Random rand;
         //constructor
         public Game()
         {
@@ -26,7 +27,7 @@ namespace LemonadeStand
             wallet = new Wallet();
             day = new Day();
             player = new Player();
-            
+            rand = new Random();
         }
 
         //member methods

@@ -9,21 +9,15 @@ namespace LemonadeStand
     public class Customer
     {
         //member variables
-        private int people;
-
-        public int People
+        private Random _rnd = new Random();
+        public bool RandomPurchaseLikelihood(double probability)
         {
-            get
-            {
-                return people;
-            }
-            set
-            {
-                people = value;
-            }
+            return _rnd.NextDouble() < probability;
         }
 
-        public List<int> peopleCount = new List<int>();
+        public List<int> people = new List<int>();
+
+
 
         //constructor
         public Customer()
@@ -32,24 +26,51 @@ namespace LemonadeStand
         }
 
         //member methods
-        public void CreatePeople(List<int> peopleCount)
-        {
-            Random random = new Random();
-            people = random.Next(50, 100);
-            
-        }
 
-        public void CreateCustomer()
-        {
 
-        }
-
-        public void BuyLemonade()
+        public void ChecksWeatherAndPrice(Weather weather, Recipe recipe)
         {
-            for (int i = 0; i < people; i++)
+            if (weather.Temperature >= 80 && weather.Condition == "sunny" && recipe.LemonadePrice <= 0.50)
             {
+                RandomPurchaseLikelihood(0.9);
+            }
 
+            else if (weather.Temperature >= 80 && weather.Condition == "sunny" && recipe.LemonadePrice >= 0.51)
+            {
+                RandomPurchaseLikelihood(0.8);
+            }
+
+            else if (weather.Temperature >= 80 && weather.Condition != "sunny" && recipe.LemonadePrice <= 0.50)
+            {
+                RandomPurchaseLikelihood(0.70);
+            }
+
+            else if (weather.Temperature >= 80 && weather.Condition != "sunny" && recipe.LemonadePrice >= 0.51)
+            {
+                RandomPurchaseLikelihood(0.60);
+            }
+
+            else if (weather.Temperature <= 79 && weather.Condition == "sunny" && recipe.LemonadePrice <= 0.50)
+            {
+                RandomPurchaseLikelihood(0.55);
+            }
+            else if (weather.Temperature <= 79 && weather.Condition == "sunny" && recipe.LemonadePrice >= 0.51)
+            {
+                RandomPurchaseLikelihood(0.5);
+            }
+
+            else if (weather.Temperature <= 79 && weather.Condition != "sunny" && recipe.LemonadePrice <= 0.50)
+            {
+                RandomPurchaseLikelihood(0.40);
+            }
+            else if (weather.Temperature <= 79 && weather.Condition != "sunny" && recipe.LemonadePrice >= 0.51)
+            {
+                RandomPurchaseLikelihood(0.25);
+            }
+            else
+            {
+                RandomPurchaseLikelihood(0.10);
+            }
             }
         }
     }
-}
