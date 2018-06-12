@@ -9,7 +9,7 @@ namespace LemonadeStand
     public class Game
     {
         //member variables
-        //public Weather weather;
+        public Weather weather;
         public Inventory inventory;
         public Recipe recipe;
         public Customer customer;
@@ -19,7 +19,7 @@ namespace LemonadeStand
         //constructor
         public Game()
         {
-            //weather = new Weather();
+            weather = new Weather();
             inventory = new Inventory();
             recipe = new Recipe();
             customer = new Customer();
@@ -40,8 +40,8 @@ namespace LemonadeStand
             //weather.SetConditions();
             //weather.DeclareForecast();
             inventory.PurchaseSupplies(wallet);
-            inventory = recipe.MakeRecipe(inventory);
-            
+            inventory = recipe.MakePitcher(inventory);
+            recipe.DeterminePriceOfLemonade();
 
         }
     }

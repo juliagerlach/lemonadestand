@@ -12,6 +12,9 @@ namespace LemonadeStand
         private int lemonCount;
         private int sugarCount;
         private int iceCount;
+        private int cupCount;
+        private int cupsInPitcher;
+        private double lemonadePrice;
 
         public int LemonCount
         {
@@ -29,6 +32,39 @@ namespace LemonadeStand
         {
             get { return iceCount; }
             set { iceCount = value; }
+        }
+
+        public int CupCount
+        {
+            get
+            { return cupCount; }
+            set
+            { cupCount = value; }
+        }
+
+        public int CupsInPitcher
+        {
+            get
+            { return cupsInPitcher; }
+            set
+            { cupsInPitcher = value; }
+        }
+
+        public double LemonadePrice
+        {
+            get
+            {
+                return lemonadePrice;
+            }
+            set
+            {
+                lemonadePrice = value;
+            }
+        }
+
+        public Recipe()
+        {
+
         }
 
         public Inventory DetermineLemonsPerPitcher(Inventory inventory)
@@ -69,48 +105,81 @@ namespace LemonadeStand
         }
 
         public Inventory DetermineIcePerCup(Inventory inventory)
+        {
+            string useIce;
+            Console.WriteLine("How much ice per cup? Please enter an integer and then press 'enter' to continue.");
+            useIce = Console.ReadLine();
+            if (int.TryParse(useIce, out int number3))
             {
-                string useIce;
-                Console.WriteLine("How much ice per cup? Please enter an integer and then press 'enter' to continue.");
-                useIce = Console.ReadLine();
-                if (int.TryParse(useIce, out int number3))
-                {
-                    iceCount += Int32.Parse(useIce);
-                }
-                else
-                {
-                    Console.WriteLine("Error: Must enter an integer.");
-                    Console.ReadLine();
-                    inventory = DetermineIcePerCup(inventory);
-                }
-            return inventory;
+                iceCount += Int32.Parse(useIce);
             }
-
-            public Inventory MakeRecipe(Inventory inventory)
+            else
             {
-            Console.WriteLine("Time to create today's recipe! When prompted, indicate how much of each item you would like to use to make your lemonade. Each pitcher makes 12 cups. Press 'enter' to continue.");
+                Console.WriteLine("Error: Must enter an integer.");
+                Console.ReadLine();
+                inventory = DetermineIcePerCup(inventory);
+            }
+            return inventory;
+        }
 
+        public Inventory MakePitcher(Inventory inventory)
+        {
+            cupsInPitcher = 0;
+            Console.WriteLine("Time to create today's recipe! When prompted, indicate how much of each item you would like to use to make your lemonade. Each pitcher makes 12 cups. Press 'enter' to continue.");
             Console.ReadLine();
             inventory = DetermineLemonsPerPitcher(inventory);
             inventory = DetermineSugarPerPitcher(inventory);
             inventory = DetermineIcePerCup(inventory);
             Console.Clear();
 
-            if (lemonCount <= inventory.LemonQuantity && sugarCount <= inventory.SugarQuantity && iceCount <= inventory.IceQuantity)
+            if (lemonCount <= inventory.LemonQuantity && sugarCount <= inventory.SugarQuantity && iceCount <= inventory.IceQuantity && cupCount <= inventory.CupQuantity)
             {
                 inventory.LemonQuantity -= lemonCount;
                 inventory.SugarQuantity -= sugarCount;
                 inventory.IceQuantity -= iceCount;
-                Console.WriteLine("You just made one pitcher of lemonade.");
+                cupsInPitcher = 12;
+                Console.WriteLine("You just made a pitcher of lemonade.");
                 Console.ReadLine();
             }
             else
             {
-                Console.WriteLine("Your supplies have dwindled - not enough to make another pitcher!");
+                Console.WriteLine("Your supplies have dwindled - you don't have enough to make another pitcher! No more lemonade sales today.");
                 Console.ReadLine();
                 Console.Clear();
             }
             return inventory;
-            }       
+        }
+
+        public double DeterminePriceOfLemonade()
+        {
+            string pricePerCup;
+            Console.WriteLine("How much do you want to sell each cup of lemonade for today? Please use '0.00' format to indicate dollars and cents and then press 'enter'.");
+            pricePerCup = Console.ReadLine();
+            if (double.TryParse(pricePerCup, out double number1))
+            {
+                lemonadePrice += Int32.Parse(pricePerCup);
+            }
+            else
+            {
+                Console.WriteLine("Error: Please use the correct format.");
+                Console.ReadLine();
+            }
+            return lemonadePrice;
+
+            //public Inventory DecrementLemonade(Inventory inventory)
+            //    {
+            //      if (cupsInPitcher > 0)
+            //    {
+            //      cupsInPitcher--;
+            //}
+            //else
+            // {
+            //   inventory = MakePitcher(inventory);
+            // }
+            //return inventory;
+            //}
+            //}
+        }
+
     }
 }

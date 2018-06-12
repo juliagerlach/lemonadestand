@@ -9,6 +9,21 @@ namespace LemonadeStand
     public class Customer
     {
         //member variables
+        private int people;
+
+        public int People
+        {
+            get
+            {
+                return people;
+            }
+            set
+            {
+                people = value;
+            }
+        }
+
+        public List<int> peopleCount = new List<int>();
 
         //constructor
         public Customer()
@@ -17,14 +32,24 @@ namespace LemonadeStand
         }
 
         //member methods
-        public void GeneratePeople()
+        public void CreatePeople(List<int> peopleCount)
+        {
+            Random random = new Random();
+            people = random.Next(50, 100);
+            
+        }
+
+        public void CreateCustomer()
         {
 
         }
 
-        public void GenerateCustomer()
+        public void BuyLemonade()
         {
+            for (int i = 0; i < people; i++)
+            {
 
+            }
         }
     }
 }

@@ -28,11 +28,6 @@ namespace LemonadeStand
 
         //member methods
 
-        public void PayForSupplies()
-        {
-
-        }
-
         public void IncrementMoney()
         {
 

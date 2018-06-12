@@ -210,11 +210,6 @@ namespace LemonadeStand
         }
         //member methods
 
-        public void UseInventory()
-        {
-
-        }
-
         public void DeclareInventory()
         {
             Console.WriteLine("Your current inventory contains: " + cupQuantity + " cups, " + lemonQuantity + " lemons, " + sugarQuantity + " cups of sugar, " + iceQuantity + " ice cubes. Press 'enter' to continue.");
