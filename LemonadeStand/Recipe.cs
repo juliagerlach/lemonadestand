@@ -152,34 +152,32 @@ namespace LemonadeStand
 
         public double DeterminePriceOfLemonade()
         {
+            double x;
             string pricePerCup;
-            Console.WriteLine("How much do you want to sell each cup of lemonade for today? Please use '0.00' format to indicate dollars and cents and then press 'enter'.");
-            pricePerCup = Console.ReadLine();
-            if (double.TryParse(pricePerCup, out double number1))
+            do
             {
-                lemonadePrice += Int32.Parse(pricePerCup);
-            }
-            else
-            {
-                Console.WriteLine("Error: Please use the correct format.");
-                Console.ReadLine();
-            }
+                do
+                {
+                    Console.WriteLine("How much do you want to sell each cup of lemonade for today? Please use '0.00' format to indicate dollars and cents and then press 'enter'.");
+                    pricePerCup = Console.ReadLine();
+                }while (!double.TryParse(pricePerCup, out x));
+            } while((Convert.ToDouble(pricePerCup) > 1)||(Convert.ToDouble(pricePerCup) <= 0));
+            LemonadePrice = Convert.ToDouble(pricePerCup);
+            
             return lemonadePrice;
-
-            //public Inventory DecrementLemonade(Inventory inventory)
-            //    {
-            //      if (cupsInPitcher > 0)
-            //    {
-            //      cupsInPitcher--;
-            //}
-            //else
-            // {
-            //   inventory = MakePitcher(inventory);
-            // }
-            //return inventory;
-            //}
-            //}
         }
+            public Inventory DecrementLemonade(Inventory inventory)
+            {
+                if (cupsInPitcher > 0)
+                {
+                    cupsInPitcher--;
+                }
+                else
+                {
+                MakePitcher(inventory);
+                }
 
+                return inventory;
+            }      
+        }
     }
-}

@@ -8,7 +8,6 @@ namespace LemonadeStand
 {
     public class Game
     {
-        //member variables
         public Weather weather;
         public Inventory inventory;
         public Recipe recipe;
@@ -16,7 +15,8 @@ namespace LemonadeStand
         public Wallet wallet;
         public Day day;
         public Player player;
-        static Random rand;
+        static Random random;
+
         //constructor
         public Game()
         {
@@ -27,23 +27,26 @@ namespace LemonadeStand
             wallet = new Wallet();
             day = new Day();
             player = new Player();
-            rand = new Random();
+            random = new Random();
         }
 
         //member methods
+        public void DisplayRules()
+        {
+            Console.WriteLine("Welcome to 'Lemonade Stand', the game that lets you turn lemons into lemonade. \n\nPurchase the supplies you need, set the price, and watch the thirsty customers arrive in droves -- or not! \n\nIf you set your price too high or if the weather takes a turn for the worse, you may not be able to move your inventory. \n\nGet the equation right, and you'll be rolling in cash. Press 'enter' to continue.");
+            Console.ReadLine();
+            Console.Clear();
+        }
         public void RunGame()
         {
-            //weather.SetTemperature();
-            //weather.SetConditions();
-            //weather.DeclareWeather();
-
-            //weather.SetTemperature();
-            //weather.SetConditions();
-            //weather.DeclareForecast();
-            inventory.PurchaseSupplies(wallet);
-            inventory = recipe.MakePitcher(inventory);
-            recipe.DeterminePriceOfLemonade();
-
+            player.SetPlayerName();
+            day.EstablishDays();
+            day.GenerateDays(weather, inventory, recipe, day, wallet);
+            
+            customer.VisitStand(day, weather, recipe, wallet, inventory);
+            inventory.DeclareCupsSold();
+            inventory.DeclareInventory();
+            player.DeclareCashBalance(wallet);
         }
     }
 }

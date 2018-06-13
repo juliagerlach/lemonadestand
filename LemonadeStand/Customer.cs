@@ -9,15 +9,17 @@ namespace LemonadeStand
     public class Customer
     {
         //member variables
-        private Random _rnd = new Random();
-        public bool RandomPurchaseLikelihood(double probability)
+
+        
+        private double thirst;
+
+        public double Thirst
         {
-            return _rnd.NextDouble() < probability;
+            get
+            { return thirst; }
+            set
+            { thirst = value; }
         }
-
-        public List<int> people = new List<int>();
-
-
 
         //constructor
         public Customer()
@@ -27,50 +29,69 @@ namespace LemonadeStand
 
         //member methods
 
-
-        public void ChecksWeatherAndPrice(Weather weather, Recipe recipe)
+        public void VisitStand(Day day, Weather weather, Recipe recipe, Wallet wallet, Inventory inventory)
         {
-            if (weather.Temperature >= 80 && weather.Condition == "sunny" && recipe.LemonadePrice <= 0.50)
+            for (int j = 0; j < day.NumberOfCustomers; j++)
             {
-                RandomPurchaseLikelihood(0.9);
+                CheckWeather(weather, recipe, wallet, inventory);
+                CheckPrice(recipe, weather, wallet, inventory);
+                BuyLemonade(recipe, wallet, inventory);
+            }
+        }
+        public void CheckWeather(Weather weather, Recipe recipe, Wallet wallet, Inventory inventory)
+        {
+            Random random = new Random();
+            if (weather.Temperature >= 80 && weather.Condition == "sunny")
+            {
+                thirst = random.Next(70, 100);
             }
 
-            else if (weather.Temperature >= 80 && weather.Condition == "sunny" && recipe.LemonadePrice >= 0.51)
+            else if (weather.Temperature >= 80 && weather.Condition != "sunny")
             {
-                RandomPurchaseLikelihood(0.8);
+                thirst = random.Next(60, 90);
             }
 
-            else if (weather.Temperature >= 80 && weather.Condition != "sunny" && recipe.LemonadePrice <= 0.50)
+            else if (weather.Temperature <= 79 && weather.Condition == "sunny")
             {
-                RandomPurchaseLikelihood(0.70);
+                thirst = random.Next(50, 80);
             }
-
-            else if (weather.Temperature >= 80 && weather.Condition != "sunny" && recipe.LemonadePrice >= 0.51)
+            else if (weather.Temperature <= 79 && weather.Condition != "sunny")
             {
-                RandomPurchaseLikelihood(0.60);
-            }
-
-            else if (weather.Temperature <= 79 && weather.Condition == "sunny" && recipe.LemonadePrice <= 0.50)
-            {
-                RandomPurchaseLikelihood(0.55);
-            }
-            else if (weather.Temperature <= 79 && weather.Condition == "sunny" && recipe.LemonadePrice >= 0.51)
-            {
-                RandomPurchaseLikelihood(0.5);
-            }
-
-            else if (weather.Temperature <= 79 && weather.Condition != "sunny" && recipe.LemonadePrice <= 0.50)
-            {
-                RandomPurchaseLikelihood(0.40);
-            }
-            else if (weather.Temperature <= 79 && weather.Condition != "sunny" && recipe.LemonadePrice >= 0.51)
-            {
-                RandomPurchaseLikelihood(0.25);
+                thirst = random.Next(40, 70);
             }
             else
             {
-                RandomPurchaseLikelihood(0.10);
+                thirst = .10;
             }
+            CheckPrice(recipe, weather, wallet, inventory);
+        }
+
+        public Recipe CheckPrice(Recipe recipe, Weather weather, Wallet wallet, Inventory inventory)
+        {
+            if (recipe.LemonadePrice <= (thirst * weather.Temperature)/100)
+            {
+                BuyLemonade(recipe, wallet, inventory);
+                inventory.CupsSold++;
+            }
+            else
+            {
+
+            }
+        return recipe;
+        }
+        public void BuyLemonade(Recipe recipe, Wallet wallet, Inventory inventory)
+        {
+            if (recipe.CupsInPitcher > 0)
+            {
+                wallet.CashBalance += recipe.LemonadePrice;
+                inventory.CupQuantity--;
+            }
+
+            else
+            {
+                recipe.MakePitcher(inventory);
             }
         }
     }
+
+}

@@ -8,7 +8,6 @@ namespace LemonadeStand
 {
     public class Wallet
     {
-        //member variables
         private double cashBalance;
 
         public double CashBalance
@@ -16,21 +15,9 @@ namespace LemonadeStand
             get { return cashBalance; }
             set { cashBalance = value; }
         }
-
-
-
-
-        //contructor
         public Wallet()
         {
             cashBalance = 20.00;
         }
-
-        //member methods
-
-        public void IncrementMoney()
-        {
-
-        } 
     }
 }

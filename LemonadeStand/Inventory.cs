@@ -21,6 +21,7 @@ namespace LemonadeStand
         private int iceQuantity;
         private double icePrice;
         private int icePurchase;
+        private int cupsSold;
 
         public int CupQuantity
         {
@@ -88,6 +89,12 @@ namespace LemonadeStand
         {
             get { return icePurchase; }
             set { icePurchase = value; }
+        }
+
+        public int CupsSold
+        {
+            get { return cupsSold; }
+            set { cupsSold = value; }
         }
 
         public void PurchaseSupplies(Wallet wallet)
@@ -214,6 +221,14 @@ namespace LemonadeStand
         {
             Console.WriteLine("Your current inventory contains: " + cupQuantity + " cups, " + lemonQuantity + " lemons, " + sugarQuantity + " cups of sugar, " + iceQuantity + " ice cubes. Press 'enter' to continue.");
             Console.ReadLine();
+            Console.Clear();
+        }
+
+        public void DeclareCupsSold()
+        {
+            Console.WriteLine("You sold " + cupsSold + " today and made $" + (cupsSold * cupPrice) + ".");
+            Console.ReadLine();
+            Console.Clear();
         }
         public void GetInventoryValue()
         {
