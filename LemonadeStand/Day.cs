@@ -39,19 +39,21 @@ namespace LemonadeStand
             {
                 Console.WriteLine("Error: Must enter an integer.");
                 Console.ReadLine();
+                EstablishDays();
             }
             return numberOfDays;
         }
 
-        public int GenerateCustomers()
+        public void GenerateCustomers()
         {
             Random random = new Random();
             numberOfCustomers = random.Next(50, 100);
-            return numberOfCustomers;
+            Console.WriteLine("will this game keep going with " + numberOfCustomers + "waiting.");
+            Console.ReadLine();
         }
     
 
-    public void GenerateDays(Weather weather, Inventory inventory, Recipe recipe, Day day, Wallet wallet)
+    public void GenerateDays(Weather weather, Inventory inventory, Recipe recipe, Day day, Wallet wallet, Customer customer, Player player)
     {
         for (int i = 0; i < day.NumberOfDays; i++) 
         {
@@ -62,11 +64,17 @@ namespace LemonadeStand
                 weather.SetTemperature();
                 weather.SetConditions();
                 weather.DeclareForecast();
+
                 inventory.PurchaseSupplies(wallet);
                 inventory = recipe.MakePitcher(inventory);
                 recipe.DeterminePriceOfLemonade();
+
                 GenerateCustomers();
 
+                customer.VisitStand(day, weather, recipe, wallet, inventory);
+                inventory.DeclareCupsSold();
+                inventory.DeclareInventory();
+                player.DeclareCashBalance(wallet);
             }
     }
   }

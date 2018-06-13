@@ -10,7 +10,7 @@ namespace LemonadeStand
     {
         //member variables
 
-        
+
         private double thirst;
 
         public double Thirst
@@ -68,7 +68,7 @@ namespace LemonadeStand
 
         public Recipe CheckPrice(Recipe recipe, Weather weather, Wallet wallet, Inventory inventory)
         {
-            if (recipe.LemonadePrice <= (thirst * weather.Temperature)/100)
+            if (recipe.LemonadePrice <= (thirst * weather.Temperature) / 100)
             {
                 BuyLemonade(recipe, wallet, inventory);
                 inventory.CupsSold++;
@@ -77,7 +77,7 @@ namespace LemonadeStand
             {
 
             }
-        return recipe;
+            return recipe;
         }
         public void BuyLemonade(Recipe recipe, Wallet wallet, Inventory inventory)
         {

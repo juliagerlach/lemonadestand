@@ -57,13 +57,13 @@ namespace LemonadeStand
 
         public void DeclareWeather()
         {
-            Console.WriteLine("Today's weather is " + temperature + " and " + condition + ".");
+            Console.WriteLine("Today's weather is " + temperature + " and " + condition + ". Press 'enter' to continue.");
             Console.ReadLine();
         }
 
         public void DeclareForecast()
         {
-            Console.WriteLine("Tomorrow's weather is forecast to be " + temperature + " and " + condition + ".");
+            Console.WriteLine("Tomorrow's weather is forecast to be " + temperature + " and " + condition + ". Press 'enter to continue.");
             Console.ReadLine();
             Console.Clear();
         }

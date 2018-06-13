@@ -16,6 +16,7 @@ namespace LemonadeStand
         public Day day;
         public Player player;
         static Random random;
+        public Game game;
 
         //constructor
         public Game()
@@ -28,25 +29,27 @@ namespace LemonadeStand
             day = new Day();
             player = new Player();
             random = new Random();
+
         }
 
         //member methods
         public void DisplayRules()
         {
             Console.WriteLine("Welcome to 'Lemonade Stand', the game that lets you turn lemons into lemonade. \n\nPurchase the supplies you need, set the price, and watch the thirsty customers arrive in droves -- or not! \n\nIf you set your price too high or if the weather takes a turn for the worse, you may not be able to move your inventory. \n\nGet the equation right, and you'll be rolling in cash. Press 'enter' to continue.");
-            Console.ReadLine();
+            //Console.ReadLine();
             Console.Clear();
+        }
+
+        public void NextCustomer()
+        {
+            Customer customer = new Customer();
         }
         public void RunGame()
         {
             player.SetPlayerName();
             day.EstablishDays();
-            day.GenerateDays(weather, inventory, recipe, day, wallet);
+            day.GenerateDays(weather, inventory, recipe, day, wallet, customer, player);
             
-            customer.VisitStand(day, weather, recipe, wallet, inventory);
-            inventory.DeclareCupsSold();
-            inventory.DeclareInventory();
-            player.DeclareCashBalance(wallet);
         }
     }
 }
